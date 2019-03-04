@@ -19,18 +19,17 @@ public class MainActivity extends AppCompatActivity {
         newReminder.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(String.valueOf(this), "Button clicked!");
-
+                launchSecondActivity(null);
             }
         });
+    }
+    public void launchSecondActivity (View v) {
+        Log.d(String.valueOf(this), "Button clicked!");
 
-        public void launchSecondActivity(View view){
-            Log.d(String.valueOf(this), "Button clicked!");
+        Intent intent = new Intent(this, ReminderSetup.class);
 
-            Intent intent = new Intent(this, ReminderSetup.class);
-
-            //intent.putExtra(EXTRA_MESSAGE, message);
-            //startActivityForResult(intent, TEXT_REQUEST);
-            startActivity(intent);
-        }
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        //startActivityForResult(intent, TEXT_REQUEST);
+        startActivity(intent);
     }
 }

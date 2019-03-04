@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Reminders</string>
     <string name="new_reminder">New Reminder</string>
+    <string name="name_of_reminder">Name of reminder</string>
+    <string name="reminder_settings">Reminder Settings</string>
+    <string name="reminder_description">Reminder Description</string>
+    <string name="share">Share?</string>
+    <string name="email_if_share">Email (If Share)</string>
+    <string name="time_to_alert">Time to alert</string>
+    <string name="time_based">Time-Based</string>
+    <string name="location_based">Location-Based</string>
 </resources>
