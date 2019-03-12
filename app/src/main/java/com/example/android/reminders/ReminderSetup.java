@@ -16,7 +16,7 @@ public class ReminderSetup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_setup);
 
-        //Start of Finalizing XML layout stuff
+        //Start of Finalizing XML layout stuff [
         final Button nextAction = findViewById(R.id.finish);
 
         final EditText description = findViewById(R.id.reminderDescription);
@@ -24,7 +24,7 @@ public class ReminderSetup extends AppCompatActivity {
         final CheckBox timeBased = findViewById(R.id.timeBased);
         final CheckBox locationBased = findViewById(R.id.locationBased);
         final CheckBox collab = findViewById(R.id.collab);
-        //End of Finalizing XML layout stuff
+        //End of Finalizing XML layout stuff ]
 
         nextAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

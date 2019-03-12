@@ -10,4 +10,7 @@
     <string name="time_based">Time-Based</string>
     <string name="location_based">Location-Based</string>
     <string name="next">Finish</string>
+    <string name="alert_type">Alert Type</string>
+    <string name="don_t_alert_please">Don\'t Alert. Please!</string>
+    <string name="please_alert_me">Please Alert Me!</string>
 </resources>
