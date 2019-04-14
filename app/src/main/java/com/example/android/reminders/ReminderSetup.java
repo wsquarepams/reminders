@@ -9,7 +9,24 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class ReminderSetup extends AppCompatActivity {
+
+    // region - variables
+    private EditText description;
+    private EditText reminderName;
+    //private EditText time;
+
+    private CheckBox timeBased;
+    private CheckBox locationBased;
+    private CheckBox collab;
+
+    // endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,26 +34,55 @@ public class ReminderSetup extends AppCompatActivity {
         setContentView(R.layout.activity_reminder_setup);
 
         //Start of Finalizing XML layout stuff [
-        final Button nextAction = findViewById(R.id.finish);
+        final Button finishButton = findViewById(R.id.finish);
 
-        final EditText description = findViewById(R.id.reminderDescription);
+        description = findViewById(R.id.reminderDescription);
+        reminderName = findViewById(R.id.reminderName);
+        //time = findViewById(R.id.time);
 
-        final CheckBox timeBased = findViewById(R.id.timeBased);
-        final CheckBox locationBased = findViewById(R.id.locationBased);
-        final CheckBox collab = findViewById(R.id.collab);
+        timeBased = findViewById(R.id.timeBased);
+        locationBased = findViewById(R.id.locationBased);
+        collab = findViewById(R.id.collab);
         //End of Finalizing XML layout stuff ]
 
-        nextAction.setOnClickListener(new View.OnClickListener() {
+        finishButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(String.valueOf(this), "Next Activity Called");
-                launchSecondActivity(null);
+                onFinishClicked(null);
             }
         });
     }
-    public void launchSecondActivity (View v) {
+    public void onFinishClicked (View v) {
         Log.d(String.valueOf(this), "Button clicked!");
+        Reminder reminder = new Reminder();
+        Date currentTime = new Date();
+        reminder.setName(reminderName.getText().toString());
+        reminder.setDescription(description.getText().toString());
+        //reminder.setTime()
+        reminder.setLatitude(2324.44);
+        reminder.setLongitude(3434.45);
+        reminder.setTime(currentTime.getTime());
 
-        Intent intent = new Intent(this, ReminderSetup.class);
+        Reminder yo = new Reminder();
+        Date nowTime = new Date();
+        yo.setName(reminderName.getText().toString());
+        yo.setDescription(description.getText().toString());
+        //reminder.setTime()
+        yo.setLatitude(2324.44);
+        yo.setLongitude(3434.45);
+        yo.setTime(nowTime.getTime());
+
+        List<Reminder> reminderList = new ArrayList();
+        reminderList.add(reminder);
+        reminderList.add(yo);
+
+        Gson gson = new Gson();
+        String myJSON = gson.toJson(reminderList);
+
+
+        Log.d("varCheck", myJSON);
+
+        Intent intent = new Intent(this, MainActivity.class);
 
         //intent.putExtra(EXTRA_MESSAGE, message);
         //startActivityForResult(intent, TEXT_REQUEST);
