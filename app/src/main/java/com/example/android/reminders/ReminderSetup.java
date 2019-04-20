@@ -11,9 +11,18 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.net.URLConnection;
 
 public class ReminderSetup extends AppCompatActivity {
 
@@ -52,7 +61,7 @@ public class ReminderSetup extends AppCompatActivity {
             }
         });
     }
-    public void onFinishClicked (View v) {
+    public void onFinishClicked (View v) throws IOException {
         Log.d(String.valueOf(this), "Button clicked!");
         Reminder reminder = new Reminder();
         Date currentTime = new Date();
@@ -81,6 +90,22 @@ public class ReminderSetup extends AppCompatActivity {
 
 
         Log.d("varCheck", myJSON);
+
+        URL url = new URL("http://www.reminderapp.tk/");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        try {
+            urlConnection.setDoOutput(true);
+            urlConnection.setChunkedStreamingMode(0);
+
+            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
+            writeStream(out);
+
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            readStream(in);
+        } finally {
+            urlConnection.disconnect();
+        }
+
 
         Intent intent = new Intent(this, MainActivity.class);
 
