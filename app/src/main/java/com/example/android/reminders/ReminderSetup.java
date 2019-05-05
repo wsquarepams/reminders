@@ -1,5 +1,6 @@
 package com.example.android.reminders;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.net.URLConnection;
+import android.content.SharedPreferences;
+import android.widget.Toast;
 
 public class ReminderSetup extends AppCompatActivity {
 
@@ -40,19 +43,18 @@ public class ReminderSetup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_reminder_setup);
 
-        //Start of Finalizing XML layout stuff [
         final Button finishButton = findViewById(R.id.finish);
+
 
         description = findViewById(R.id.reminderDescription);
         reminderName = findViewById(R.id.reminderName);
         //time = findViewById(R.id.time);
-
         timeBased = findViewById(R.id.timeBased);
         locationBased = findViewById(R.id.locationBased);
         collab = findViewById(R.id.collab);
-        //End of Finalizing XML layout stuff ]
 
         finishButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -61,7 +63,11 @@ public class ReminderSetup extends AppCompatActivity {
             }
         });
     }
-    public void onFinishClicked (View v) throws IOException {
+    public void onFinishClicked (View v)  {
+        final String MyPREFERENCES = "MyPrefs" ;
+        SharedPreferences sharedpreferences;
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
         Log.d(String.valueOf(this), "Button clicked!");
         Reminder reminder = new Reminder();
         Date currentTime = new Date();
@@ -91,27 +97,35 @@ public class ReminderSetup extends AppCompatActivity {
 
         Log.d("varCheck", myJSON);
 
-        URL url = new URL("http://www.reminderapp.tk/");
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        try {
-            urlConnection.setDoOutput(true);
-            urlConnection.setChunkedStreamingMode(0);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
 
-            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-            writeStream(out);
+        editor.putString("Reminder", myJSON);
+        editor.apply();
+        Toast.makeText(ReminderSetup.this,"Saved.",Toast.LENGTH_LONG).show();
 
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            readStream(in);
-        } finally {
-            urlConnection.disconnect();
-        }
+        //region - Commented URL items
 
+//        URL url = new URL("http://www.reminderapp.tk/");
+//        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//        try {
+//            urlConnection.setDoOutput(true);
+//            urlConnection.setChunkedStreamingMode(0);
+//
+//            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
+//            writeStream(out);
+//
+//            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+//            readStream(in);
+//        } finally {
+//            urlConnection.disconnect();
+//        }
+        //endregion
 
-        Intent intent = new Intent(this, MainActivity.class);
-
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        //startActivityForResult(intent, TEXT_REQUEST);
-        startActivity(intent);
+        onBackPressed();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
