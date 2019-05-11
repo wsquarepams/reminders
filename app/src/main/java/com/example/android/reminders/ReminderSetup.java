@@ -55,13 +55,20 @@ public class ReminderSetup extends AppCompatActivity {
             description.setText(reminderList.get(currentIndex).getDescription());
             delete.setVisibility(View.VISIBLE);
         } else {
-            delete.setVisibility(View.INVISIBLE);
+            delete.setVisibility(View.GONE);
         }
 
         finishButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(String.valueOf(this), "Next Activity Called");
                 onFinishClicked(null);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d(String.valueOf(this), "User to Delete");
+                onDeleteClicked(null);
             }
         });
     }
@@ -113,6 +120,12 @@ public class ReminderSetup extends AppCompatActivity {
 //        }
         //endregion
 
+        onBackPressed();
+    }
+
+    public void onDeleteClicked (View v) {
+        reminderList.remove(currentIndex);
+        saveList();
         onBackPressed();
     }
 
