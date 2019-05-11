@@ -29,6 +29,8 @@ public class ReminderSetup extends AppCompatActivity {
     private CheckBox locationBased;
     private CheckBox collab;
 
+    private Button delete;
+
     // endregion
 
     @Override
@@ -46,10 +48,14 @@ public class ReminderSetup extends AppCompatActivity {
         timeBased = findViewById(R.id.timeBased);
         locationBased = findViewById(R.id.locationBased);
         collab = findViewById(R.id.collab);
+        delete = findViewById(R.id.delete);
 
         if (currentIndex > -1) {
             reminderName.setText(reminderList.get(currentIndex).getName());
             description.setText(reminderList.get(currentIndex).getDescription());
+            delete.setVisibility(View.VISIBLE);
+        } else {
+            delete.setVisibility(View.INVISIBLE);
         }
 
         finishButton.setOnClickListener(new View.OnClickListener() {
