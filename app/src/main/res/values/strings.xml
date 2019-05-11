@@ -15,4 +15,5 @@
     <string name="please_alert_me">Sound</string>
     <string name="enter_time_to_alert">Enter Time To Alert</string>
     <string name="strength">Strength</string>
+    <string name="delete">Delete</string>
 </resources>
