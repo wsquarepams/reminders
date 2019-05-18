@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+        startService(new Intent(this, ReminderService.class));
     }
 
     @Override
@@ -85,9 +87,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         //intent.putExtra(EXTRA_MESSAGE, message);
         //startActivityForResult(intent, TEXT_REQUEST);
         startActivity(intent);
-    }
-    private void prepareReminderData() {
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override

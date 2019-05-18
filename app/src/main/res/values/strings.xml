@@ -16,4 +16,7 @@
     <string name="enter_time_to_alert">Enter Time To Alert</string>
     <string name="strength">Strength</string>
     <string name="delete">Delete</string>
+    <string name="channel_name">Reminder</string>
+    <string name="channel_description">Display my reminder.</string>
+    <string name="open_app">Open Application</string>
 </resources>

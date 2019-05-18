@@ -39,6 +39,7 @@ public class ReminderSetup extends AppCompatActivity {
 
         setContentView(R.layout.activity_reminder_setup);
 
+
         final Button finishButton = findViewById(R.id.finish);
 
 
@@ -84,8 +85,8 @@ public class ReminderSetup extends AppCompatActivity {
             reminder.setName(reminderName.getText().toString());
             reminder.setDescription(description.getText().toString());
             //reminder.setTime()
-            reminder.setLatitude(2324.44);
-            reminder.setLongitude(3434.45);
+            reminder.setLatitude(49.2051);
+            reminder.setLongitude(-122.78);
             reminder.setTime(currentTime.getTime());
 
             reminderList.add(reminder);
@@ -95,8 +96,8 @@ public class ReminderSetup extends AppCompatActivity {
             reminder.setName(reminderName.getText().toString());
             reminder.setDescription(description.getText().toString());
             //reminder.setTime()
-            reminder.setLatitude(2324.44);
-            reminder.setLongitude(3434.45);
+            reminder.setLatitude(49.2052);
+            reminder.setLongitude(-122.78);
             reminder.setTime(currentTime.getTime());
         }
 
@@ -150,6 +151,6 @@ public class ReminderSetup extends AppCompatActivity {
 
         editor.putString("Reminder", myJSON);
         editor.apply();
-        Toast.makeText(ReminderSetup.this,"Saved.",Toast.LENGTH_LONG).show();
+        Toast.makeText(ReminderSetup.this,"Saved.",Toast.LENGTH_SHORT).show();
     }
 }
