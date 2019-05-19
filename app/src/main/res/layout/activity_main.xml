@@ -55,7 +55,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="casual"
-        android:text="@string/no_reminders_yet_n_use_the_new_reminder_button_to_create_one"
+        android:text="@string/no_reminders"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="24sp"
