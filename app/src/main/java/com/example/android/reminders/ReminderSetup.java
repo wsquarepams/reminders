@@ -78,41 +78,41 @@ public class ReminderSetup extends AppCompatActivity {
     }
     public void onFinishClicked (View v)  {
 
-        Reminder reminder;
-        Date currentTime;
-
-        Log.d(String.valueOf(this), "Button clicked!");
-        if (currentIndex == -1) {
-            reminder = new Reminder();
-            currentTime = new Date();
-            reminder.setName(reminderName.getText().toString());
-            reminder.setDescription(description.getText().toString());
-//            if (setLocation.isChecked()){
-//                reminder.setLatitude(location.getLatitude());
-//                reminder.setLongitude(location.getLongitude());
-//            } else{
-//                reminder.setLatitude(49.2051);
-//                reminder.setLongitude(-122.78);
-//            }
-
-            reminder.setLatitude(49.2051);
-            reminder.setLongitude(-122.78);
-
-            reminder.setTime(currentTime.getTime());
-
-            reminderList.add(reminder);
-        } else {
-            reminder = reminderList.get(currentIndex);
-            currentTime = new Date();
-            reminder.setName(reminderName.getText().toString());
-            reminder.setDescription(description.getText().toString());
-            //reminder.setTime()
-            reminder.setLatitude(49.2052);
-            reminder.setLongitude(-122.78);
-            reminder.setTime(currentTime.getTime());
-        }
-
-        saveList();
+//        Reminder reminder;
+//        Date currentTime;
+//
+//        Log.d(String.valueOf(this), "Button clicked!");
+//        if (currentIndex == -1) {
+//            reminder = new Reminder();
+//            currentTime = new Date();
+//            reminder.setName(reminderName.getText().toString());
+//            reminder.setDescription(description.getText().toString());
+////            if (setLocation.isChecked()){
+////                reminder.setLatitude(location.getLatitude());
+////                reminder.setLongitude(location.getLongitude());
+////            } else{
+////                reminder.setLatitude(49.2051);
+////                reminder.setLongitude(-122.78);
+////            }
+//
+//            reminder.setLatitude(49.2051);
+//            reminder.setLongitude(-122.78);
+//
+//            reminder.setTime(currentTime.getTime());
+//
+//            reminderList.add(reminder);
+//        } else {
+//            reminder = reminderList.get(currentIndex);
+//            currentTime = new Date();
+//            reminder.setName(reminderName.getText().toString());
+//            reminder.setDescription(description.getText().toString());
+//            //reminder.setTime()
+//            reminder.setLatitude(49.2052);
+//            reminder.setLongitude(-122.78);
+//            reminder.setTime(currentTime.getTime());
+//        }
+//
+//        saveList();
 
         //region - Commented URL items
 
@@ -132,7 +132,14 @@ public class ReminderSetup extends AppCompatActivity {
 //        }
         //endregion
 
-        onBackPressed();
+        LocationUtil.getLocation(this, new LocationUpdateListener() {
+            @Override
+            public void locationUpdated(Location location, Context context) {
+                Log.d("Location-test", "Updated lat: " + location.getLatitude() + " long: " + location.getLongitude());
+            }
+        });
+
+        //onBackPressed();
     }
 
     public void onDeleteClicked (View v) {

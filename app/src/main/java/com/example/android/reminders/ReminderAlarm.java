@@ -1,6 +1,5 @@
 package com.example.android.reminders;
 import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,7 +8,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.PowerManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +29,8 @@ public class ReminderAlarm extends BroadcastReceiver implements LocationUpdateLi
         wl.acquire();
 
         // Put here YOUR code.
-        LocationUtil.getLocation(context, this);
+        //LocationUtil.getLocation(context, this);
+        LocationUtil.startLocationUpdatesIfNecessary(context, this);
         //Toast.makeText(context, "ReminderAlarm failed. Error: ErrorNo. 1033: Too lame. <p>Make More interesting.</p>", Toast.LENGTH_LONG).show();
 
         wl.release();
