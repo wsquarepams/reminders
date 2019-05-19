@@ -19,4 +19,6 @@
     <string name="channel_name">Reminder</string>
     <string name="channel_description">Display my reminder.</string>
     <string name="open_app">Open Application</string>
+    <string name="set_to_current_location">SET TO CURRENT LOCATION</string>
+    <string name="no_reminders_yet_n_use_the_new_reminder_button_to_create_one">No Reminders Yet! \n \n  Use the \'New Reminder\' button to create one!</string>
 </resources>

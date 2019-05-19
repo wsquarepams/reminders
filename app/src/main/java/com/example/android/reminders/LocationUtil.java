@@ -7,6 +7,7 @@ import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -29,6 +30,7 @@ public class LocationUtil {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+            Toast.makeText(context, "Permission Denied.", Toast.LENGTH_LONG).show();
             return;
         }
         fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     public static List<Reminder> reminderList = new ArrayList<>();
     public static int currentIndex;
     private Gson gson = new Gson();
+    private TextView noReminders;
     //endregion
 
     @Override
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         SharedPreferences sharedpreferences;
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         String reminders = sharedpreferences.getString("Reminder", "[]");
+        noReminders = findViewById(R.id.noReminders);
 
         Type listType = new TypeToken<List<Reminder>>() {}.getType();
         reminderList = gson.fromJson(reminders, listType);
@@ -67,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (reminderList.size() == 0) {
+            noReminders.setVisibility(View.VISIBLE);
+        } else {
+            noReminders.setVisibility(View.GONE);
+        }
+
         mAdapter.notifyDataSetChanged();
     }
 //        recyclerView.setHasFixedSize(true);

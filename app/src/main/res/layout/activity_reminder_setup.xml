@@ -133,6 +133,21 @@
             <!--android:layout_height="302dp" />-->
 
             <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:background="?android:attr/listDivider" />
+
+            <CheckBox
+                android:id="@+id/currentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/set_to_current_location"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="24sp" />
+
+            <View
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -164,45 +179,6 @@
                 android:textAllCaps="true"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="181dp"
-                tools:layout_editor_absoluteY="244dp">
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/don_t_alert_please"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/strength" />
-
-                <SeekBar
-                    android:id="@+id/seekBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:max="10"
-                    android:progress="10" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/please_alert_me"
-                    android:textAlignment="center" />
-
-            </RadioGroup>
 
         </LinearLayout>
     </ScrollView>

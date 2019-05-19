@@ -2,6 +2,7 @@ package com.example.android.reminders;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class ReminderSetup extends AppCompatActivity {
     private CheckBox timeBased;
     private CheckBox locationBased;
     private CheckBox collab;
+    private CheckBox setLocation;
 
     private Button delete;
 
@@ -50,6 +52,7 @@ public class ReminderSetup extends AppCompatActivity {
         locationBased = findViewById(R.id.locationBased);
         collab = findViewById(R.id.collab);
         delete = findViewById(R.id.delete);
+        setLocation = findViewById(R.id.currentLocation);
 
         if (currentIndex > -1) {
             reminderName.setText(reminderList.get(currentIndex).getName());
@@ -84,9 +87,17 @@ public class ReminderSetup extends AppCompatActivity {
             currentTime = new Date();
             reminder.setName(reminderName.getText().toString());
             reminder.setDescription(description.getText().toString());
-            //reminder.setTime()
+//            if (setLocation.isChecked()){
+//                reminder.setLatitude(location.getLatitude());
+//                reminder.setLongitude(location.getLongitude());
+//            } else{
+//                reminder.setLatitude(49.2051);
+//                reminder.setLongitude(-122.78);
+//            }
+
             reminder.setLatitude(49.2051);
             reminder.setLongitude(-122.78);
+
             reminder.setTime(currentTime.getTime());
 
             reminderList.add(reminder);
