@@ -110,7 +110,7 @@
                     android:id="@+id/startText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start"
+                    android:text="@string/start"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="24sp" />
@@ -136,7 +136,7 @@
                     android:id="@+id/endText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="End"
+                    android:text="@string/end"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="24sp" />
@@ -169,12 +169,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/location_based" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="18dp"
-                android:background="?android:attr/listDivider" />
-
             <CheckBox
                 android:id="@+id/currentLocation"
                 android:layout_width="match_parent"
@@ -183,6 +177,15 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_green_dark"
                 android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/locationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/location_name_you_choose"
+                android:inputType="text"
+                android:textAlignment="center" />
 
             <View
                 android:id="@+id/divider2"

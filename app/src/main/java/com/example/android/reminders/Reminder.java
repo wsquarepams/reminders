@@ -5,10 +5,9 @@ public class Reminder {
     private double longitude;
     private String name;
     private String description;
-    private String startDate;
-    private String startTime;
-    private String endDate;
-    private String endTime;
+    private String startTimestamp;
+    private String endTimestamp;
+    private String locationName;
     private Boolean isTimeBased;
 
     public double getLatitude() {
@@ -43,36 +42,20 @@ public class Reminder {
         this.description = description;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getStartTimestamp() {
+        return startTimestamp;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setStartTimestamp(String startTimestamp) {
+        this.startTimestamp = startTimestamp;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getEndTimestamp() {
+        return endTimestamp;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEndTimestamp(String endTimestamp) {
+        this.endTimestamp = endTimestamp;
     }
 
     public Boolean getTimeBased() {
@@ -83,6 +66,14 @@ public class Reminder {
         isTimeBased = timeBased;
     }
 
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
     @Override
     public String toString() {
         return "Reminder{" +
@@ -90,10 +81,10 @@ public class Reminder {
                 ", longitude=" + longitude +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", endTime='" + endTime + '\'' +
+                ", startTimestamp='" + startTimestamp + '\'' +
+                ", endTimestamp='" + endTimestamp + '\'' +
+                ", locationName='" + locationName + '\'' +
+                ", isTimeBased=" + isTimeBased +
                 '}';
     }
 }

@@ -21,8 +21,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static com.example.android.reminders.MainActivity.currentIndex;
 import static com.example.android.reminders.MainActivity.reminderList;
@@ -36,6 +39,7 @@ public class ReminderSetup extends AppCompatActivity {
     private EditText startTime;
     private EditText endDate;
     private EditText endTime;
+    private EditText locationName;
     //private EditText time;
 
     private LinearLayout linearLayout;
@@ -72,17 +76,45 @@ public class ReminderSetup extends AppCompatActivity {
         startTime = findViewById(R.id.startTime);
         endDate = findViewById(R.id.endDate);
         endTime = findViewById(R.id.endTime);
+        locationName = findViewById(R.id.locationName);
 
         if (currentIndex > -1) {
             reminderName.setText(reminderList.get(currentIndex).getName());
             description.setText(reminderList.get(currentIndex).getDescription());
+            locationName.setText(reminderList.get(currentIndex).getLocationName());
             timeBased.setChecked(reminderList.get(currentIndex).getTimeBased());
+
             if (reminderList.get(currentIndex).getTimeBased()) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd" , Locale.CANADA);
+                DateFormat timeFormat = new SimpleDateFormat("hh:mm", Locale.CANADA);
+                DateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.CANADA);
+                String startTimestamp = reminderList.get(currentIndex).getStartTimestamp();
+                String endTimestamp = reminderList.get(currentIndex).getEndTimestamp();
+
+                try {
+                    // parse and format start time
+                    Date timeStamp = timestampFormat.parse(startTimestamp);
+
+                    String startDateString = dateFormat.format(timeStamp);
+                    startDate.setText(startDateString);
+
+                    String startTimeString = timeFormat.format(timeStamp);
+                    startTime.setText(startTimeString);
+
+                    // parse and format end time
+                    timeStamp = timestampFormat.parse(endTimestamp);
+
+                    String endDateString = dateFormat.format(timeStamp);
+                    endDate.setText(endDateString);
+
+                    String endTimeString = timeFormat.format(timeStamp);
+                    endTime.setText(endTimeString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 linearLayout.setVisibility(View.VISIBLE);
-                startDate.setText(reminderList.get(currentIndex).getStartDate());
-                startTime.setText(reminderList.get(currentIndex).getStartTime());
-                endDate.setText(reminderList.get(currentIndex).getEndDate());
-                endTime.setText(reminderList.get(currentIndex).getEndTime());
+
             } else {
                 linearLayout.setVisibility(View.GONE);
             }
@@ -126,45 +158,51 @@ public class ReminderSetup extends AppCompatActivity {
     }
     public void onFinishClicked (View v)  {
 
-        Reminder reminder;
-
         Log.d(String.valueOf(this), "Button clicked!");
-        if (currentIndex == -1) {
-            reminder = new Reminder();
-            reminder.setName(reminderName.getText().toString());
-            reminder.setDescription(description.getText().toString());
-            if (setLocation.isChecked()){
-                reminder.setLatitude(49.2051);
-                reminder.setLongitude(-122.78);
-            } else {
-                reminder.setLatitude(49.2051);
-                reminder.setLongitude(-122.78);
-            }
 
-            reminder.setLatitude(49.2051);
-            reminder.setLongitude(-122.78);
-            reminder.setStartDate(startDate.getText().toString());
-            reminder.setStartTime(startTime.getText().toString());
-            reminder.setEndDate(endDate.getText().toString());
-            reminder.setEndTime(endTime.getText().toString());
-            reminder.setTimeBased(timeBased.isChecked());
+        LocationUtil.getLastLocation(this, new LocationUpdateListener() {
+            @Override
+            public void locationUpdated(Location location, Context context) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                Reminder reminder;
 
-            reminderList.add(reminder);
-        } else {
-            reminder = reminderList.get(currentIndex);
-            reminder.setName(reminderName.getText().toString());
-            reminder.setDescription(description.getText().toString());
-            reminder.setLatitude(49.2052);
-            reminder.setLongitude(-122.78);
-            reminder.setStartDate(startDate.getText().toString());
-            reminder.setStartTime(startTime.getText().toString());
-            reminder.setEndDate(endDate.getText().toString());
-            reminder.setEndTime(endTime.getText().toString());
-        }
+                if (currentIndex == -1) {
+                    reminder = new Reminder();
+                    reminder.setName(reminderName.getText().toString());
+                    reminder.setDescription(description.getText().toString());
+                    if (setLocation.isChecked()){
+                        reminder.setLatitude(latitude);
+                        reminder.setLongitude(longitude);
+                    } else {
+                        reminder.setLatitude(latitude);
+                        reminder.setLongitude(longitude);
+                    }
 
-        saveList();
+                    reminder.setLocationName(locationName.getText().toString());
 
-        //region - Commented URL items
+                    reminder.setStartTimestamp(startDate.getText().toString() + " " + startTime.getText().toString());
+                    reminder.setEndTimestamp(endDate.getText().toString() + " " + endTime.getText().toString());
+                    reminder.setTimeBased(timeBased.isChecked());
+
+                    reminderList.add(reminder);
+                } else {
+                    reminder = reminderList.get(currentIndex);
+                    reminder.setName(reminderName.getText().toString());
+                    reminder.setDescription(description.getText().toString());
+                    reminder.setLatitude(latitude);
+                    reminder.setLongitude(longitude);
+
+                    reminder.setLocationName(locationName.getText().toString());
+
+                    reminder.setStartTimestamp(startDate.getText().toString() + " " + startTime.getText().toString());
+                    reminder.setEndTimestamp(endDate.getText().toString() + " " + endTime.getText().toString());
+                    reminder.setTimeBased(timeBased.isChecked());
+                }
+
+                saveList();
+
+                //region - Commented URL items
 
 //        URL url = new URL("http://www.reminderapp.tk/");
 //        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -180,9 +218,12 @@ public class ReminderSetup extends AppCompatActivity {
 //        } finally {
 //            urlConnection.disconnect();
 //        }
-        //endregion
+                //endregion
 
-        onBackPressed();
+                onBackPressed();
+            }
+        });
+
     }
 
     public void onDeleteClicked (View v) {
@@ -242,7 +283,8 @@ public class ReminderSetup extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                editText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                String date = String.format(Locale.CANADA, "%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
+                                editText.setText(date);
                             }
                         }, year, month, day);
                 datePicker.show();
@@ -252,7 +294,8 @@ public class ReminderSetup extends AppCompatActivity {
                 timePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                      @Override
                      public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                         editText.setText("" + hourOfDay + ':' + minute);
+                         String time = String.format(Locale.CANADA, "%02d:%02d", hourOfDay, minute);
+                         editText.setText(time);
                      }
                  },hour, minute, true);
                 timePicker.show();

@@ -24,4 +24,7 @@
     <string name="start_time_text">Enter start time.</string>
     <string name="end_date_text">Enter end date</string>
     <string name="end_time_text">Enter end time</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="location_name_you_choose">Location Name (You Choose)</string>
 </resources>

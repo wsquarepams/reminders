@@ -27,7 +27,7 @@ public class LocationUtil {
     private static long FASTEST_INTERVAL = 2000; /* 2 sec */
     private static boolean firstUpdate = true;
 
-    public static void getLocation(final Context context, final LocationUpdateListener listener) {
+    public static void getLastLocation(final Context context, final LocationUpdateListener listener) {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

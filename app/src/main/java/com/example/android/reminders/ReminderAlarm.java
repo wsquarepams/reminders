@@ -13,8 +13,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ReminderAlarm extends BroadcastReceiver implements LocationUpdateListener
 {
@@ -29,7 +34,7 @@ public class ReminderAlarm extends BroadcastReceiver implements LocationUpdateLi
         wl.acquire();
 
         // Put here YOUR code.
-        //LocationUtil.getLocation(context, this);
+        //LocationUtil.getLastLocation(context, this);
         LocationUtil.startLocationUpdatesIfNecessary(context, this);
         //Toast.makeText(context, "ReminderAlarm failed. Error: ErrorNo. 1033: Too lame. <p>Make More interesting.</p>", Toast.LENGTH_LONG).show();
 
@@ -66,15 +71,45 @@ public class ReminderAlarm extends BroadcastReceiver implements LocationUpdateLi
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
 
-        checkLocationTriggered(latitude, longitude, context);
+        checkReminderTriggered(latitude, longitude, context);
     }
 
-    private void checkLocationTriggered(double latitude, double longitude, Context context) {
+    private void checkReminderTriggered(double latitude, double longitude, Context context) {
+        boolean shouldTrigger = false;
+
         for (Reminder r : sharedReminderList) {
             float distance = LocationUtil.getDistanceBetweenTwoPoints(latitude, longitude, r.getLatitude(), r.getLongitude());
             if (distance < 100) {
-                Log.d("HEY!", "You have arrived!");
-                NotificationUtil.createNotification(context, r);
+                if (r.getTimeBased()) {
+                    String startTime = r.getStartTimestamp();
+                    String endTime = r.getEndTimestamp();
+
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd" , Locale.CANADA);
+                    DateFormat timeFormat = new SimpleDateFormat("hh:mm", Locale.CANADA);
+                    DateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.CANADA);
+
+                    try {
+                        // parse start time
+                        Date startTimeStamp = timestampFormat.parse(startTime);
+                        // parse end time
+                        Date endTimeStamp = timestampFormat.parse(endTime);
+
+                        Date now = new Date();
+
+                        if (now.before(endTimeStamp) && now.after(startTimeStamp)) {
+                            shouldTrigger = true;
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    shouldTrigger = true;
+                }
+
+                if (shouldTrigger) {
+                    Log.d("HEY!", "You have arrived!");
+                    NotificationUtil.createNotification(context, r);
+                }
             }
         }
     }
