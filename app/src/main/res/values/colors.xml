@@ -10,4 +10,5 @@
     <color name="googleBlue">#4581fd</color>
     <color name="orange">#fe583a</color>
     <color name="black">#000000</color>
+    <color name="locationName">#a906ae</color>
 </resources>

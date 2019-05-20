@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +26,10 @@ import com.google.gson.Gson;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static com.example.android.reminders.MainActivity.currentIndex;
@@ -50,6 +55,11 @@ public class ReminderSetup extends AppCompatActivity {
     private CheckBox setLocation;
 
     private Button delete;
+    private Button finishButton;
+
+    public static List<EditText> requiredFieldsList = new ArrayList<>();
+
+    int requiredFilled = 0;
 
     // endregion
 
@@ -58,9 +68,6 @@ public class ReminderSetup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_reminder_setup);
-
-
-        final Button finishButton = findViewById(R.id.finish);
 
 
         description = findViewById(R.id.reminderDescription);
@@ -77,6 +84,33 @@ public class ReminderSetup extends AppCompatActivity {
         endDate = findViewById(R.id.endDate);
         endTime = findViewById(R.id.endTime);
         locationName = findViewById(R.id.locationName);
+        finishButton =  findViewById(R.id.finish);
+
+        requiredFieldsList.add(reminderName);
+        requiredFieldsList.add(description);
+        requiredFieldsList.add(locationName);
+
+        finishButton.setEnabled(false);
+
+
+        for (EditText t : requiredFieldsList) {
+            t.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    isSaveable(requiredFilled);
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        }
 
         if (currentIndex > -1) {
             reminderName.setText(reminderList.get(currentIndex).getName());
@@ -254,6 +288,22 @@ public class ReminderSetup extends AppCompatActivity {
         editor.putString("Reminder", myJSON);
         editor.apply();
         Toast.makeText(ReminderSetup.this,"Saved.",Toast.LENGTH_SHORT).show();
+    }
+
+    public void isSaveable(int requiredFilled) {
+
+        for (EditText editText : requiredFieldsList) {
+            if (!TextUtils.isEmpty(editText.getText().toString())) {
+                requiredFilled++;
+            }
+        }
+
+        if (requiredFilled == requiredFieldsList.size()) {
+            finishButton.setEnabled(true);
+        } else {
+            finishButton.setEnabled(false);
+        }
+
     }
 
     class EditTextOnClickListener implements View.OnClickListener {

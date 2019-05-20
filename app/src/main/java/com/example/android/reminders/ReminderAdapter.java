@@ -13,13 +13,14 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
         private RecyclerViewOnClickListener recyclerViewOnClickListener;
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            public TextView title, description;
-            public MyViewHolder myViewHolder = this;
+            public TextView title, description, locationName;
+            private MyViewHolder myViewHolder = this;
 
-            public MyViewHolder(View view) {
+            private MyViewHolder(View view) {
                 super(view);
                 title = view.findViewById(R.id.title);
                 description = view.findViewById(R.id.description);
+                locationName = view.findViewById(R.id.locationName);
                 //year = (TextView) view.findViewById(R.id.year);
 
                 view.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +65,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
         public void onBindViewHolder(MyViewHolder holder, int position) {
             Reminder reminder = reminderList.get(position);
             holder.title.setText(reminder.getName());
-            holder.description.setText(reminder.getDescription());
+            holder.description.setText("Description: " + reminder.getDescription());
+            holder.locationName.setText("\n Location to trigger: " + reminder.getLocationName());
             //holder.year.setText(reminder.getYear());
         }
 

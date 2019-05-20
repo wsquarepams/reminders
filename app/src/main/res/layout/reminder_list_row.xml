@@ -44,14 +44,13 @@
                 android:textSize="13sp"
                 android:textStyle="italic" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/locationName"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/title_container"-->
-            <!--android:textColor="@color/description"-->
-            <!--android:textSize="13sp"-->
-            <!--android:textStyle="italic" />-->
+        <TextView
+            android:id="@+id/locationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_container"
+            android:textColor="@color/locationName"
+            android:textSize="13sp"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
