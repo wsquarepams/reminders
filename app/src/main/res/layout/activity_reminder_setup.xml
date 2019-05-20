@@ -98,35 +98,76 @@
                 android:layout_height="wrap_content"
                 android:text="@string/time_based" />
 
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/time"
+            <LinearLayout
+                android:id="@+id/timeBasedStuff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/enter_time_to_alert"
-                android:inputType="time"
-                android:textAlignment="center" />
+                android:orientation="vertical"
+                android:visibility="visible">
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="88dp" />
+                <TextView
+
+                    android:id="@+id/startText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Start"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/startDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/start_date_text"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/startTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/start_time_text"
+                    android:textAlignment="center" />
+
+                <TextView
+
+                    android:id="@+id/endText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="End"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/endDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/end_date_text"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/endTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/end_time_text"
+                    android:textAlignment="center" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+            </LinearLayout>
 
             <CheckBox
                 android:id="@+id/locationBased"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/location_based" />
-
-            <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-            <!--android:id="@+id/map"-->
-            <!--android:name="com.google.android.gms.maps.MapFragment"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="302dp" />-->
 
             <View
                 android:id="@+id/divider"

@@ -7,13 +7,13 @@
     <string name="share">Collaborate?</string>
     <string name="email_if_share">Email (If Share)</string>
     <string name="time_to_alert">Time to alert</string>
-    <string name="time_based">Time-Based</string>
+    <string name="time_based">Notify me only during this time.</string>
     <string name="location_based">Location-Based</string>
     <string name="next">Finish</string>
     <string name="alert_type">Alert Type</string>
     <string name="don_t_alert_please">Vibrate</string>
     <string name="please_alert_me">Sound</string>
-    <string name="enter_time_to_alert">Enter Time To Alert</string>
+    <string name="start_date_text">Enter start date</string>
     <string name="strength">Strength</string>
     <string name="delete">Delete</string>
     <string name="channel_name">Reminder</string>
@@ -21,4 +21,7 @@
     <string name="open_app">Open Application</string>
     <string name="set_to_current_location">SET TO CURRENT LOCATION</string>
     <string name="no_reminders">No Reminders Yet! \n \n  Use the \'New Reminder\' button to create one!</string>
+    <string name="start_time_text">Enter start time.</string>
+    <string name="end_date_text">Enter end date</string>
+    <string name="end_time_text">Enter end time</string>
 </resources>
