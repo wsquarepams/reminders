@@ -32,11 +32,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     public static int currentIndex;
     private Gson gson = new Gson();
     private TextView noReminders;
+
+    public static int oddColor;
+    public static int evenColor;
     //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        oddColor = getResources().getColor(R.color.oddIndexColor);
+        evenColor = getResources().getColor(R.color.evenIndexColor);
+
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
         final Button newReminder = findViewById(R.id.button);

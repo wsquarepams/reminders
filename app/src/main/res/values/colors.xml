@@ -3,12 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="description">#999999</color>
+    <color name="description">#f7f7f7</color>
     <color name="title">#222222</color>
     <color name="red">#ffff0000</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#fffeff</color>
     <color name="googleBlue">#4581fd</color>
     <color name="orange">#fe583a</color>
     <color name="black">#000000</color>
     <color name="locationName">#a906ae</color>
+    <color name="oddIndexColor">#9799d1</color>
+    <color name="evenIndexColor">#fcc100</color>
+    <color name="backgroundColor">#1c1a1c</color>
 </resources>
