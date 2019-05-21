@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
-        final ImageButton newReminder = findViewById(R.id.button);
+        final ImageButton newReminder = findViewById(R.id.new_reminder);
         newReminder.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(String.valueOf(this), "Button clicked!");
