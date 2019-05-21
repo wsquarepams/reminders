@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public TextView title, description, locationName, alertTime;
             public CardView cardView;
+            public ImageView timeIcon, locationIcon;
             private MyViewHolder myViewHolder = this;
 
 
@@ -27,6 +29,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
                 description = view.findViewById(R.id.description);
                 locationName = view.findViewById(R.id.locationName);
                 alertTime = view.findViewById(R.id.alertTime);
+                timeIcon = view.findViewById(R.id.timeIcon);
+                locationIcon = view.findViewById(R.id.locationIcon);
                 cardView = (CardView) view;
 
                 //year = (TextView) view.findViewById(R.id.year);
@@ -81,9 +85,12 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
             holder.title.setText(reminder.getName());
             holder.description.setText("Description: " + reminder.getDescription());
             holder.locationName.setText("Location: " + reminder.getLocationName());
+            holder.locationIcon.setVisibility(View.VISIBLE);
             if (reminder.getTimeBased()) {
+                holder.timeIcon.setVisibility(View.VISIBLE);
                 holder.alertTime.setText("Alert time:" + reminder.getStartTimestamp() + " to " + reminder.getEndTimestamp());
             } else {
+                holder.timeIcon.setVisibility(View.INVISIBLE);
                 holder.alertTime.setText("No Alert Time.");
             }
         }
