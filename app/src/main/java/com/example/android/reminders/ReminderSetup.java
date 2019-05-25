@@ -65,6 +65,8 @@ public class ReminderSetup extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.DarkTheme);
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_reminder_setup);
@@ -74,10 +76,8 @@ public class ReminderSetup extends AppCompatActivity {
         reminderName = findViewById(R.id.reminderName);
         //time = findViewById(R.id.time);
         timeBased = findViewById(R.id.timeBased);
-        locationBased = findViewById(R.id.locationBased);
         collab = findViewById(R.id.collab);
         delete = findViewById(R.id.delete);
-        setLocation = findViewById(R.id.currentLocation);
         linearLayout = findViewById(R.id.timeBasedStuff);
         startDate = findViewById(R.id.startDate);
         startTime = findViewById(R.id.startTime);
@@ -90,7 +90,13 @@ public class ReminderSetup extends AppCompatActivity {
         requiredFieldsList.add(description);
         requiredFieldsList.add(locationName);
 
-        finishButton.setEnabled(false);
+        if (currentIndex == -1) {
+            finishButton.setEnabled(false);
+            finishButton.setBackgroundColor(getResources().getColor(R.color.gray));
+        } else {
+            finishButton.setEnabled(true);
+            finishButton.setBackgroundColor(getResources().getColor(R.color.googleBlue));
+        }
 
 
         for (EditText t : requiredFieldsList) {
@@ -102,7 +108,9 @@ public class ReminderSetup extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    isSaveable(requiredFilled);
+                    if (currentIndex == -1) {
+                        isSaveable(requiredFilled);
+                    }
                 }
 
                 @Override
@@ -299,9 +307,13 @@ public class ReminderSetup extends AppCompatActivity {
         }
 
         if (requiredFilled == requiredFieldsList.size()) {
+            finishButton.setVisibility(View.VISIBLE);
             finishButton.setEnabled(true);
+            finishButton.setBackgroundColor(getResources().getColor(R.color.googleBlue));
         } else {
+            finishButton.setVisibility(View.VISIBLE);
             finishButton.setEnabled(false);
+            finishButton.setBackgroundColor(getResources().getColor(R.color.gray));
         }
 
     }

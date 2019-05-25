@@ -6,32 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ReminderSetup">
 
-    <Button
-        android:id="@+id/finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/red"
-        android:text="@string/delete"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="368dp"
-        android:layout_height="445dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -163,20 +142,14 @@
 
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/locationBased"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/location_based" />
-
-            <CheckBox
-                android:id="@+id/currentLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/set_to_current_location"
+                android:text="@string/location_name"
                 android:textAlignment="center"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="24sp" />
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:visibility="visible" />
 
             <EditText
                 android:id="@+id/locationName"
@@ -210,15 +183,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="31dp" />
 
-            <TextView
-                android:id="@+id/textView2"
+            <!--<TextView-->
+                <!--android:id="@+id/textView2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/alert_type"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textAllCaps="true"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/alert_type"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight=".5">-->
+
+                    <Button
+                        android:id="@+id/delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/red"
+                        android:text="@string/delete"
+                        android:textColor="@color/white"
+                        android:layout_weight=".5"
+                        android:layout_margin="5dp"/>
+                <!--</LinearLayout>-->
+
+                <Button
+                    android:id="@+id/finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight=".5"
+                    android:background="@color/gray"
+                    android:text="@string/next"
+                    android:layout_margin="5dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

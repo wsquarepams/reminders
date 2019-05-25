@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     public static int currentIndex;
     private Gson gson = new Gson();
     private TextView noReminders;
+    private ImageView arrow;
 
     public static int oddColor;
     public static int evenColor;
@@ -46,12 +48,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
+        arrow = findViewById(R.id.arrow);
         final ImageButton newReminder = findViewById(R.id.new_reminder);
+        final ImageButton settings = findViewById(R.id.settings);
+
         newReminder.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d(String.valueOf(this), "Button clicked!");
                 currentIndex = -1;
-                launchSecondActivity(null);
+                launchSetupActivity(null);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchSettingsActivity(null);
             }
         });
 
@@ -80,8 +92,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
         if (reminderList.size() == 0) {
             noReminders.setVisibility(View.VISIBLE);
+            arrow.setVisibility(View.VISIBLE);
+
         } else {
             noReminders.setVisibility(View.GONE);
+            arrow.setVisibility(View.GONE);
         }
 
         mAdapter.notifyDataSetChanged();
@@ -96,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 //        mAdapter = new Reminder(myDataset);
         //recyclerView.setAdapter(mAdapter);
 
-    public void launchSecondActivity (View v) {
+    public void launchSetupActivity(View v) {
         Log.d(String.valueOf(this),  "Button clicked!");
 
         Intent intent = new Intent(this, ReminderSetup.class);
@@ -106,9 +121,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         startActivity(intent);
     }
 
+    public void launchSettingsActivity(View v) {
+        Log.d(String.valueOf(this),  "Button clicked!");
+
+        Intent intent = new Intent(this, SettingActivity.class);
+
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        //startActivityForResult(intent, TEXT_REQUEST);
+        startActivity(intent);
+    }
+
     @Override
     public void onItemClicked(int index) {
         currentIndex = index;
-        launchSecondActivity(null);
+        launchSetupActivity(null);
     }
 }

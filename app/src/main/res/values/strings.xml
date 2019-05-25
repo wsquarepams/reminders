@@ -27,4 +27,7 @@
     <string name="start">Start</string>
     <string name="end">End</string>
     <string name="location_name_you_choose">Location Name (You Choose)</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="settings">Settings</string>
+    <string name="location_name">LOCATION NAME</string>
 </resources>

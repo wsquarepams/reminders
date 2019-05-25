@@ -23,26 +23,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReminderSetup">
+        <activity android:name=".ReminderSetup"></activity>
 
-        </activity>
         <receiver
-            android:process=":remote"
-            android:name=".ReminderAlarm" />
+            android:name=".ReminderAlarm"
+            android:process=":remote" />
         <receiver android:name=".AutoStart">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".ReminderService"
             android:enabled="true"
-            android:process=":reminder_service">
-        </service>
+            android:process=":reminder_service"></service>
 
+        <activity android:name=".SettingActivity" android:theme="@style/DarkTheme"></activity>
     </application>
-
-
-
 
 </manifest>
