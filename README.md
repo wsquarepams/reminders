@@ -1,4 +1,8 @@
 # Reminders {Reminder App}
+
+<h3>How to clone this code</h3>
+  https://help.github.com/en/articles/fork-a-repo
+
 <h3>How to install</h3>
 1. Clone this code <br>
 2. Install android studio <br>
