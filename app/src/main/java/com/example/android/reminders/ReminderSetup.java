@@ -103,14 +103,12 @@ public class ReminderSetup extends AppCompatActivity {
             t.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                    isSaveable(requiredFilled);
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (currentIndex == -1) {
-                        isSaveable(requiredFilled);
-                    }
+                    isSaveable(requiredFilled);
                 }
 
                 @Override
@@ -213,13 +211,8 @@ public class ReminderSetup extends AppCompatActivity {
                     reminder = new Reminder();
                     reminder.setName(reminderName.getText().toString());
                     reminder.setDescription(description.getText().toString());
-                    if (setLocation.isChecked()){
-                        reminder.setLatitude(latitude);
-                        reminder.setLongitude(longitude);
-                    } else {
-                        reminder.setLatitude(latitude);
-                        reminder.setLongitude(longitude);
-                    }
+                    reminder.setLatitude(latitude);
+                    reminder.setLongitude(longitude);
 
                     reminder.setLocationName(locationName.getText().toString());
 
